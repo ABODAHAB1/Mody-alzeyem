@@ -2,6 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مودي الزعيم</title>
   <style>
     body {
@@ -19,11 +20,13 @@
       flex-direction: column;
       direction: rtl;
       animation: bgMove 20s infinite linear;
+      font-size: 20px;
+      text-align: center;
     }
 
     h1 {
       color: gold;
-      font-size: 32px;
+      font-size: 36px;
       text-shadow: 2px 2px 5px red;
       margin-bottom: 30px;
       animation: fadeIn 2s ease-in-out;
@@ -44,6 +47,8 @@
       display: inline-block;
       opacity: 0;
       animation: popUp 1s ease forwards;
+      width: 80%;
+      max-width: 400px;
     }
 
     .button:nth-of-type(n) {
@@ -72,13 +77,19 @@
     }
 
     @media (max-width: 600px) {
-      .button {
+      body {
         font-size: 18px;
-        padding: 12px 20px;
+        padding: 10px;
       }
 
       h1 {
-        font-size: 24px;
+        font-size: 28px;
+      }
+
+      .button {
+        font-size: 18px;
+        padding: 12px 20px;
+        width: 90%;
       }
     }
   </style>
