@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>Mahmoud Aboueldahab</title>
+  <title>مودي الزعيم</title>
   <style>
     body {
       margin: 0;
@@ -12,38 +12,79 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      direction: rtl;
+    }
+
+    h1 {
+      color: gold;
+      font-size: 32px;
+      text-shadow: 2px 2px 5px red;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .button {
       border: 2px solid red;
       border-radius: 10px;
       padding: 15px 30px;
-      margin: 15px;
+      margin: 10px;
       font-size: 22px;
       font-weight: bold;
       color: white;
       background-color: rgba(0, 0, 0, 0.6);
       text-decoration: none;
       box-shadow: 0 0 15px red;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.3s, box-shadow 0.3s;
       display: inline-block;
+      animation: popUp 1s ease forwards;
     }
 
     .button:hover {
       transform: scale(1.05);
       box-shadow: 0 0 25px red;
     }
+
+    img {
+      max-width: 300px;
+      border: 2px solid red;
+      box-shadow: 0 0 15px red;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popUp {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      .button {
+        font-size: 18px;
+        padding: 12px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
   </style>
 </head>
 <body>
+  <h1>✨ مرحبًا بك في عالم <span style="color: white;">مودي الزعيم</span> ✨</h1>
   <a class="button" href="https://t.me/uuruuc" target="_blank">🤫 يوزري الشخصي</a>
-  <a class="button" href="https://t.me/Tooon_Ch" target="_blank">✌️ سوبر تون</a>
-  <a class="button" href="https://t.me/UD_6_M" target="_blank">🛒 ماركت السوبر</a>
+  <a class="button" href="https://t.me/Tooon_Ch" target="_blank">✌️ قناة سوبر تون</a>
+  <a class="button" href="market.html">🛒 الماركت بتاعي</a>
+  <img src="https://i.ibb.co/3mZ7jYv/surah-ikhlas.png" alt="سورة الإخلاص">
 </body>
 </html>
 
