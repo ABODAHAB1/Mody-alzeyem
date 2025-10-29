@@ -2,7 +2,6 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ماركت الزعيم</title>
   <style>
     body {
@@ -15,23 +14,22 @@
       background-repeat: no-repeat;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
+      flex-direction: column;
       direction: rtl;
       animation: bgMove 20s infinite linear;
-      font-size: 20px;
-      text-align: center;
     }
 
     h1 {
       color: gold;
-      font-size: 36px;
+      font-size: 32px;
       text-shadow: 2px 2px 5px red;
-      margin: 30px 20px;
+      margin-bottom: 30px;
       animation: fadeIn 2s ease-in-out;
     }
 
-    .product-box {
+    .button {
       border: 2px solid red;
       border-radius: 10px;
       padding: 15px 30px;
@@ -40,38 +38,21 @@
       font-weight: bold;
       color: white;
       background-color: rgba(0, 0, 0, 0.6);
+      text-decoration: none;
       box-shadow: 0 0 15px red;
-      width: 80%;
-      max-width: 400px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      opacity: 0;
       animation: popUp 1s ease forwards;
     }
 
-    .product-box a {
-      display: block;
-      margin-top: 10px;
-      color: gold;
-      text-decoration: none;
-      font-size: 18px;
+    .button:nth-of-type(n) {
+      animation-delay: calc(0.5s + (var(--i, 0) * 0.5s));
     }
 
-    .back-button {
-      margin-top: auto;
-      margin-bottom: 30px;
-      border: 2px solid gold;
-      border-radius: 10px;
-      padding: 12px 25px;
-      font-size: 20px;
-      font-weight: bold;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.6);
-      text-decoration: none;
-      box-shadow: 0 0 15px gold;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .back-button:hover {
+    .button:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px gold;
+      box-shadow: 0 0 25px red;
     }
 
     @keyframes fadeIn {
@@ -90,52 +71,28 @@
       100% { background-position: center; }
     }
 
-    @media (max-width: 768px) {
-      body {
+    @media (max-width: 600px) {
+      .button {
         font-size: 18px;
-        padding: 10px;
+        padding: 12px 20px;
       }
 
       h1 {
-        font-size: 28px;
-      }
-
-      .product-box {
-        font-size: 18px;
-        padding: 12px 20px;
-        width: 90%;
-      }
-
-      .product-box a {
-        font-size: 16px;
-      }
-
-      .back-button {
-        font-size: 18px;
-        padding: 10px 20px;
-        width: 90%;
+        font-size: 24px;
       }
     }
   </style>
 </head>
 <body>
+  <h1>🛒 مرحبًا بك في ماركت الزعيم</h1>
 
-  <h1>🛍️ مرحبًا بك في ماركت الزعيم مودي</h1>
-
-  <!-- منتجات -->
-  <div class="product-box">
-    📦 منتج 1: تيشيرت الزعيم  
-    <a href="https://t.me/uuruuc" target="_blank">🔗 اطلب الآن</a>
-  </div>
-
-  <div class="product-box">
-    🎧 منتج 2: سماعة سوبر تون  
-    <a href="https://t.me/Tooon_Ch" target="_blank">🔗 اطلب الآن</a>
-  </div>
-
-  <!-- زر الرجوع -->
-  <a class="back-button" href="index.html">🔙 رجوع للصفحة الرئيسية</a>
-
+  <a class="button" href="https://t.me/UD_6_M/2243" target="_blank" style="--i:0;">✅ سعر توثيق حسابات تلجرام</a>
+  <a class="button" href="https://t.me/UD_6_M/2248" target="_blank" style="--i:1;">⭐ أسعار نجوم تلجرام</a>
+  <a class="button" href="https://t.me/UD_6_M/2183" target="_blank" style="--i:2;">📱 أسعار الحسابات المتوثقة في تلجرام</a>
+  <a class="button" href="https://t.me/UD_6_M/2265" target="_blank" style="--i:3;">📈 خدمات تزويد متابعين ومشاهدات لكل المواقع</a>
+  <a class="button" href="https://t.me/UD_6_M/2180" target="_blank" style="--i:4;">💰 عملات رقمية للاستقبال وللبيع</a>
+  <a class="button" href="https://t.me/UD_6_M/2179" target="_blank" style="--i:5;">💳 طرق الدفع المتاحة</a>
+  <a class="button" href="index.html" style="--i:6;">🔙 الرجوع إلى الصفحة الرئيسية</a>
 </body>
 </html>
 
