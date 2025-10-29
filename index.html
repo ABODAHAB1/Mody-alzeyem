@@ -18,6 +18,7 @@
       align-items: center;
       flex-direction: column;
       direction: rtl;
+      animation: bgMove 20s infinite linear;
     }
 
     h1 {
@@ -41,8 +42,13 @@
       box-shadow: 0 0 15px red;
       transition: transform 0.3s, box-shadow 0.3s;
       display: inline-block;
+      opacity: 0;
       animation: popUp 1s ease forwards;
     }
+
+    .button:nth-child(2) { animation-delay: 0.5s; }
+    .button:nth-child(3) { animation-delay: 1s; }
+    .button:nth-child(4) { animation-delay: 1.5s; }
 
     .button:hover {
       transform: scale(1.05);
@@ -55,6 +61,12 @@
       box-shadow: 0 0 15px red;
       border-radius: 10px;
       margin-top: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 0 25px red;
     }
 
     @keyframes fadeIn {
@@ -65,6 +77,12 @@
     @keyframes popUp {
       from { opacity: 0; transform: scale(0.8); }
       to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes bgMove {
+      0% { background-position: center; }
+      50% { background-position: top; }
+      100% { background-position: center; }
     }
 
     @media (max-width: 600px) {
@@ -80,8 +98,13 @@
   </style>
 </head>
 <body>
+  <!-- موسيقى خلفية (اختيارية) -->
+  <audio autoplay loop>
+    <source src="https://files.catbox.moe/3xqk1g.mp3" type="audio/mpeg">
+  </audio>
+
   <h1>✨ مرحبًا بك في عالم <span style="color: white;">مودي الزعيم</span> ✨</h1>
-  <a class="button" href="https://t.me/uuruuc" target="_blank">🤫 يوزري الشخصي</a>
+  <a class="button" href="https://t.me/uuruuc" target="_blank">📮 تواصل معايا</a>
   <a class="button" href="https://t.me/Tooon_Ch" target="_blank">✌️ قناة سوبر تون</a>
   <a class="button" href="market.html">🛒 الماركت بتاعي</a>
   <img src="https://i.ibb.co/3mZ7jYv/surah-ikhlas.png" alt="سورة الإخلاص">
