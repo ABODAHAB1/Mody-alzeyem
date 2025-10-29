@@ -22,6 +22,17 @@
       animation: bgMove 20s infinite linear;
     }
 
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bgMove {
+      0% { background-position: center; }
+      50% { background-position: top; }
+      100% { background-position: center; }
+    }
+
     h1, p {
       opacity: 0;
       animation: slideUp 1s ease forwards;
@@ -69,17 +80,6 @@
       animation-delay: calc(0.9s + (var(--i, 0) * 0.4s));
     }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes bgMove {
-      0% { background-position: center; }
-      50% { background-position: top; }
-      100% { background-position: center; }
-    }
-
     @media (max-width: 600px) {
       .button {
         font-size: 18px;
@@ -99,11 +99,11 @@
   </style>
 </head>
 <body>
-  <h1 class="slideUp">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
-  <p class="slideUp">هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
+  <h1>✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
+  <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
-  <a class="button slideUp" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
-  <a class="button slideUp" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ أنا وسيط سوبر تون</a>
+  <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
+  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ أنا وسيط سوبر تون</a>
 
   <a href="https://wa.me/201014482794" target="_blank" style="
     position: fixed;
@@ -121,6 +121,21 @@
   ">
   📞 تواصل مع مودي الزعيم على واتساب
   </a>
+
+  <!-- 🔊 صوت عند الضغط على أي زر -->
+  <audio id="clickSound" src="mixkit-cartoon-toy-whistle-616 (1).wav" preload="auto"></audio>
+
+  <script>
+    const buttons = document.querySelectorAll('.button');
+    const sound = document.getElementById('clickSound');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sound.currentTime = 0;
+        sound.play();
+      });
+    });
+  </script>
 </body>
 </html>
 
