@@ -2,8 +2,8 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مودي الزعيم</title>
+  <link rel="icon" type="image/jpeg" href="images/favicon-home.jpeg">
   <style>
     body {
       margin: 0;
@@ -20,17 +20,21 @@
       flex-direction: column;
       direction: rtl;
       animation: bgMove 20s infinite linear;
-      font-size: 20px;
-      text-align: center;
     }
 
     h1 {
       color: gold;
-      font-size: 40px;
+      font-size: 32px;
       text-shadow: 2px 2px 5px red;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    p {
+      color: white;
+      font-size: 18px;
       margin-bottom: 30px;
       animation: fadeIn 2s ease-in-out;
-      padding: 0 20px;
     }
 
     .button {
@@ -48,8 +52,6 @@
       display: inline-block;
       opacity: 0;
       animation: popUp 1s ease forwards;
-      width: 80%;
-      max-width: 400px;
     }
 
     .button:nth-of-type(n) {
@@ -77,31 +79,47 @@
       100% { background-position: center; }
     }
 
-    @media (max-width: 768px) {
-      body {
-        font-size: 18px;
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
+    @media (max-width: 600px) {
       .button {
         font-size: 18px;
         padding: 12px 20px;
-        width: 90%;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 16px;
+        padding: 0 10px;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <h1>✨ مرحبًا بك في عالم <span style="color: white;">مودي الزعيم</span> ✨</h1>
+  <h1>✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
+  <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
-  <!-- روابط -->
-  <a class="button" href="https://t.me/uuruuc" target="_blank" style="--i:0;">📮 تواصل معايا</a>
-  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">✌️ قناة سوبر تون</a>
-  <a class="button" href="market.html" style="--i:2;">🛒 الماركت بتاعي</a>
+  <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
+  <a class="button" href="https://t.me/UD_6_M" target="_blank" style="--i:1;">📣 قناتي على تليجرام</a>
+
+  <a href="https://wa.me/201014482794" target="_blank" style="
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: green;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 10px #000;
+    z-index: 999;
+  ">
+  📞 تواصل مع مودي الزعيم على واتساب
+  </a>
 </body>
 </html>
 
