@@ -9,10 +9,18 @@
       padding: 0;
       font-family: 'Georgia', serif;
       background-color: #111;
-      color: white;
-      text-align: center;
+      background-image: url("https://i.ibb.co/RGhvw9DG/6028418910325427074-121.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       padding-top: 50px;
       direction: rtl;
+      animation: bgMove 20s infinite linear;
     }
 
     h2 {
@@ -20,6 +28,7 @@
       font-size: 28px;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px red;
+      animation: fadeIn 2s ease-in-out;
     }
 
     img {
@@ -28,6 +37,12 @@
       box-shadow: 0 0 15px red;
       border-radius: 10px;
       margin-bottom: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 0 25px red;
     }
 
     .button {
@@ -43,19 +58,61 @@
       transition: transform 0.2s, box-shadow 0.2s;
       display: inline-block;
       margin: 10px;
+      opacity: 0;
+      animation: popUp 1s ease forwards;
     }
+
+    .button:nth-of-type(3) { animation-delay: 0.5s; }
+    .button:nth-of-type(4) { animation-delay: 1s; }
+    .button:nth-of-type(5) { animation-delay: 1.5s; }
+    .button:nth-of-type(6) { animation-delay: 2s; }
+    .button:nth-of-type(7) { animation-delay: 2.5s; }
 
     .button:hover {
       transform: scale(1.05);
       box-shadow: 0 0 20px red;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popUp {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bgMove {
+      0% { background-position: center; }
+      50% { background-position: top; }
+      100% { background-position: center; }
+    }
+
+    @media (max-width: 600px) {
+      .button {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
   <h2>🛒 مرحبًا بك في ماركت مودي الزعيم</h2>
   <img src="https://i.ibb.co/3mZ7jYv/surah-ikhlas.png" alt="سورة الإخلاص">
-  <p><a class="button" href="https://t.me/UD_6_M" target="_blank">📦 دخول إلى الماركت</a></p>
-  <p><a class="button" href="index.html">🔙 رجوع للصفحة الرئيسية</a></p>
+
+  <!-- روابط الماركت -->
+  <a class="button" href="https://t.me/UD_6_M" target="_blank">📦 دخول إلى الماركت</a>
+  <a class="button" href="index.html">🔙 رجوع للصفحة الرئيسية</a>
+
+  <!-- أزرار الأسعار -->
+  <a class="button" href="https://t.me/UD_6_M/2243" target="_blank">💎 سعر التوثيق</a>
+  <a class="button" href="https://t.me/UD_6_M/2248" target="_blank">⭐ أسعار النجوم</a>
+  <a class="button" href="https://t.me/UD_6_M/2208" target="_blank">🎮 أسعار شداد ببجي</a>
 </body>
 </html>
 
