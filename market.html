@@ -57,6 +57,12 @@
       box-shadow: 0 0 20px red;
     }
 
+    audio {
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px red;
+      border-radius: 10px;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -86,25 +92,25 @@
   </style>
 </head>
 <body>
-  <!-- زر تشغيل سورة الإخلاص داخل الموقع -->
-  <audio id="ikhlasAudio">
+  <!-- مشغل صوت حقيقي -->
+  <audio controls>
     <source src="https://server8.mp3quran.net/maher/112.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
   </audio>
-  <button onclick="document.getElementById('ikhlasAudio').play()" class="button" style="--i:0;">🔊 تشغيل سورة الإخلاص داخل الموقع</button>
 
-  <!-- زر يفتح الصوت في صفحة خارجية -->
-  <a class="button" href="https://server8.mp3quran.net/maher/112.mp3" target="_blank" style="--i:1;">🎧 استماع خارجي لسورة الإخلاص</a>
+  <!-- زر يفتح التلاوة على يوتيوب -->
+  <a class="button" href="https://www.youtube.com/watch?v=K2mZ3f9pZzE" target="_blank" style="--i:0;">🎧 استماع خارجي على يوتيوب</a>
 
   <h2>🛒 مرحبًا بك في ماركت مودي الزعيم</h2>
 
   <!-- روابط الماركت -->
-  <a class="button" href="https://t.me/UD_6_M" target="_blank" style="--i:2;">📦 دخول إلى الماركت</a>
-  <a class="button" href="index.html" style="--i:3;">🔙 رجوع للصفحة الرئيسية</a>
+  <a class="button" href="https://t.me/UD_6_M" target="_blank" style="--i:1;">📦 دخول إلى الماركت</a>
+  <a class="button" href="index.html" style="--i:2;">🔙 رجوع للصفحة الرئيسية</a>
 
   <!-- أزرار الأسعار -->
-  <a class="button" href="https://t.me/UD_6_M/2243" target="_blank" style="--i:4;">💎 سعر التوثيق</a>
-  <a class="button" href="https://t.me/UD_6_M/2248" target="_blank" style="--i:5;">⭐ أسعار النجوم</a>
-  <a class="button" href="https://t.me/UD_6_M/2208" target="_blank" style="--i:6;">🎮 أسعار شداد ببجي</a>
+  <a class="button" href="https://t.me/UD_6_M/2243" target="_blank" style="--i:3;">💎 سعر التوثيق</a>
+  <a class="button" href="https://t.me/UD_6_M/2248" target="_blank" style="--i:4;">⭐ أسعار النجوم</a>
+  <a class="button" href="https://t.me/UD_6_M/2208" target="_blank" style="--i:5;">🎮 أسعار شداد ببجي</a>
 </body>
 </html>
 
