@@ -22,19 +22,24 @@
       animation: bgMove 20s infinite linear;
     }
 
+    h1, p {
+      opacity: 0;
+      animation: slideUp 1s ease forwards;
+    }
+
     h1 {
       color: gold;
       font-size: 32px;
       text-shadow: 2px 2px 5px red;
       margin-bottom: 10px;
-      animation: fadeIn 2s ease-in-out;
+      animation-delay: 0.3s;
     }
 
     p {
       color: white;
       font-size: 18px;
       margin-bottom: 30px;
-      animation: fadeIn 2s ease-in-out;
+      animation-delay: 0.6s;
     }
 
     .button {
@@ -48,29 +53,25 @@
       background-color: rgba(0, 0, 0, 0.6);
       text-decoration: none;
       box-shadow: 0 0 15px red;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
       display: inline-block;
       opacity: 0;
-      animation: popUp 1s ease forwards;
-    }
-
-    .button:nth-of-type(n) {
-      animation-delay: calc(0.5s + (var(--i, 0) * 0.5s));
+      animation: slideUp 1s ease forwards;
     }
 
     .button:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
       box-shadow: 0 0 25px red;
+      background-color: rgba(255, 0, 0, 0.2);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
+    .button:nth-of-type(n) {
+      animation-delay: calc(0.9s + (var(--i, 0) * 0.4s));
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes popUp {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); opacity: 1; }
     }
 
     @keyframes bgMove {
@@ -98,11 +99,11 @@
   </style>
 </head>
 <body>
-  <h1 class="fadeIn">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
-  <p class="fadeIn">هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
+  <h1 class="slideUp">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
+  <p class="slideUp">هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
-  <a class="button popUp" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
-  <a class="button popUp" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ أنا وسيط سوبر تون</a>
+  <a class="button slideUp" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
+  <a class="button slideUp" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ أنا وسيط سوبر تون</a>
 
   <a href="https://wa.me/201014482794" target="_blank" style="
     position: fixed;
