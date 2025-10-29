@@ -46,26 +46,12 @@
       animation: popUp 1s ease forwards;
     }
 
-    .button:nth-of-type(2) { animation-delay: 0.5s; }
-    .button:nth-of-type(3) { animation-delay: 1s; }
-    .button:nth-of-type(4) { animation-delay: 1.5s; }
+    .button:nth-of-type(n) {
+      animation-delay: calc(0.5s + (var(--i, 0) * 0.5s));
+    }
 
     .button:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px red;
-    }
-
-    img {
-      max-width: 300px;
-      border: 2px solid red;
-      box-shadow: 0 0 15px red;
-      border-radius: 10px;
-      margin-top: 30px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    img:hover {
-      transform: scale(1.05) rotate(-1deg);
       box-shadow: 0 0 25px red;
     }
 
@@ -98,17 +84,19 @@
   </style>
 </head>
 <body>
-  <!-- زر تشغيل سورة الإخلاص -->
+  <!-- زر تشغيل سورة الإخلاص داخل الموقع -->
   <audio id="ikhlasAudio">
     <source src="https://server8.mp3quran.net/maher/112.mp3" type="audio/mpeg">
   </audio>
-  <button onclick="document.getElementById('ikhlasAudio').play()" class="button">🔊 تشغيل سورة الإخلاص</button>
+  <button onclick="document.getElementById('ikhlasAudio').play()" class="button" style="--i:0;">🔊 تشغيل سورة الإخلاص داخل الموقع</button>
+
+  <!-- زر يفتح الصوت في صفحة خارجية -->
+  <a class="button" href="https://server8.mp3quran.net/maher/112.mp3" target="_blank" style="--i:1;">🎧 استماع خارجي لسورة الإخلاص</a>
 
   <h1>✨ مرحبًا بك في عالم <span style="color: white;">مودي الزعيم</span> ✨</h1>
-  <a class="button" href="https://t.me/uuruuc" target="_blank">📮 تواصل معايا</a>
-  <a class="button" href="https://t.me/Tooon_Ch" target="_blank">✌️ قناة سوبر تون</a>
-  <a class="button" href="market.html">🛒 الماركت بتاعي</a>
-  <img src="https://i.ibb.co/3mZ7jYv/surah-ikhlas.png" alt="سورة الإخلاص">
+  <a class="button" href="https://t.me/uuruuc" target="_blank" style="--i:2;">📮 تواصل معايا</a>
+  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:3;">✌️ قناة سوبر تون</a>
+  <a class="button" href="market.html" style="--i:4;">🛒 الماركت بتاعي</a>
 </body>
 </html>
 
