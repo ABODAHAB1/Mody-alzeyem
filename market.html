@@ -2,13 +2,13 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>ماركت مودي الزعيم</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ماركت الزعيم</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', serif;
-      background-color: #111;
       background-image: url("https://i.ibb.co/RGhvw9DG/6028418910325427074-121.jpg");
       background-size: cover;
       background-position: center;
@@ -17,44 +17,61 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding-top: 50px;
       direction: rtl;
       animation: bgMove 20s infinite linear;
+      font-size: 20px;
+      text-align: center;
     }
 
-    h2 {
+    h1 {
       color: gold;
-      font-size: 28px;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 5px red;
+      font-size: 36px;
+      text-shadow: 2px 2px 5px red;
+      margin: 30px 20px;
       animation: fadeIn 2s ease-in-out;
     }
 
-    .button {
+    .product-box {
       border: 2px solid red;
       border-radius: 10px;
-      padding: 10px 20px;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px red;
+      width: 80%;
+      max-width: 400px;
+      animation: popUp 1s ease forwards;
+    }
+
+    .product-box a {
+      display: block;
+      margin-top: 10px;
+      color: gold;
+      text-decoration: none;
       font-size: 18px;
+    }
+
+    .back-button {
+      margin-top: auto;
+      margin-bottom: 30px;
+      border: 2px solid gold;
+      border-radius: 10px;
+      padding: 12px 25px;
+      font-size: 20px;
       font-weight: bold;
       color: white;
       background-color: rgba(0, 0, 0, 0.6);
       text-decoration: none;
-      box-shadow: 0 0 10px red;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-block;
-      margin: 10px;
-      opacity: 0;
-      animation: popUp 1s ease forwards;
+      box-shadow: 0 0 15px gold;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .button:nth-of-type(n) {
-      animation-delay: calc(0.5s + (var(--i, 0) * 0.5s));
-    }
-
-    .button:hover {
+    .back-button:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px red;
+      box-shadow: 0 0 25px gold;
     }
 
     @keyframes fadeIn {
@@ -73,29 +90,52 @@
       100% { background-position: center; }
     }
 
-    @media (max-width: 600px) {
-      .button {
-        font-size: 16px;
-        padding: 8px 16px;
+    @media (max-width: 768px) {
+      body {
+        font-size: 18px;
+        padding: 10px;
       }
 
-      h2 {
-        font-size: 22px;
+      h1 {
+        font-size: 28px;
+      }
+
+      .product-box {
+        font-size: 18px;
+        padding: 12px 20px;
+        width: 90%;
+      }
+
+      .product-box a {
+        font-size: 16px;
+      }
+
+      .back-button {
+        font-size: 18px;
+        padding: 10px 20px;
+        width: 90%;
       }
     }
   </style>
 </head>
 <body>
-  <h2>🛒 مرحبًا بك في ماركت مودي الزعيم</h2>
 
-  <!-- روابط الماركت -->
-  <a class="button" href="https://t.me/UD_6_M" target="_blank" style="--i:0;">📦 دخول إلى الماركت</a>
-  <a class="button" href="index.html" style="--i:1;">🔙 رجوع للصفحة الرئيسية</a>
+  <h1>🛍️ مرحبًا بك في ماركت الزعيم مودي</h1>
 
-  <!-- أزرار الأسعار -->
-  <a class="button" href="https://t.me/UD_6_M/2243" target="_blank" style="--i:2;">💎 سعر التوثيق</a>
-  <a class="button" href="https://t.me/UD_6_M/2248" target="_blank" style="--i:3;">⭐ أسعار النجوم</a>
-  <a class="button" href="https://t.me/UD_6_M/2208" target="_blank" style="--i:4;">🎮 أسعار شداد ببجي</a>
+  <!-- منتجات -->
+  <div class="product-box">
+    📦 منتج 1: تيشيرت الزعيم  
+    <a href="https://t.me/uuruuc" target="_blank">🔗 اطلب الآن</a>
+  </div>
+
+  <div class="product-box">
+    🎧 منتج 2: سماعة سوبر تون  
+    <a href="https://t.me/Tooon_Ch" target="_blank">🔗 اطلب الآن</a>
+  </div>
+
+  <!-- زر الرجوع -->
+  <a class="back-button" href="index.html">🔙 رجوع للصفحة الرئيسية</a>
+
 </body>
 </html>
 
