@@ -21,6 +21,7 @@
       flex-direction: column;
       direction: rtl;
       animation: bgMove 20s infinite linear;
+      overflow: hidden;
     }
 
     @keyframes slideUp {
@@ -97,6 +98,21 @@
         text-align: center;
       }
     }
+
+    /* ✨ تأثير النجوم */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      animation: twinkle 2s infinite ease-in-out;
+      border-radius: 50%;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -106,7 +122,6 @@
   <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
   <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️  وسيط سوبر تون</a>
 
-  <!-- فقرة توضيحية قبل زر التواصل -->
   <p style="
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
@@ -118,10 +133,9 @@
     max-width: 90%;
     box-shadow: 0 0 10px red;
   ">
-  إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
+    إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
   </p>
 
-  <!-- زر واتساب الجديد -->
   <a href="https://wa.me/201274821083" target="_blank" style="
     position: fixed;
     bottom: 20px;
@@ -136,10 +150,9 @@
     box-shadow: 0 0 10px #000;
     z-index: 999;
   ">
-  📞 تواصل واتساب
+    📞 تواصل واتساب
   </a>
 
-  <!-- 🔊 صوت عند الضغط على أي زر -->
   <audio id="clickSound" src="mixkit-cartoon-toy-whistle-616 (1).wav" preload="auto"></audio>
 
   <script>
@@ -152,6 +165,15 @@
         sound.play();
       });
     });
+
+    // ✨ إنشاء النجوم
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * 100 + "vh";
+      star.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(star);
+    }
   </script>
 </body>
 </html>
