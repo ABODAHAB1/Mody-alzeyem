@@ -114,7 +114,6 @@
       }
     }
 
-    /* ✨ النجوم */
     .star {
       position: absolute;
       width: 6px;
@@ -135,7 +134,6 @@
       50% { opacity: 1; }
     }
 
-    /* 🕒 الساعة والتاريخ بشكل أنيق */
     #clock {
       position: fixed;
       top: 20px;
@@ -164,42 +162,21 @@
 <body>
   <div id="clock"><i>🕒</i> <span id="time"></span> <i>📅</i> <span id="date"></span></div>
 
+  <!-- 🧠 رسالة ترحيب حسب الوقت تظهر وتختفي -->
+  <div id="greetingMessage" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background-color: #ff4444; color: white; padding: 10px 20px; border-radius: 8px; font-size: 20px; font-weight: bold; z-index: 9999;"></div>
+
   <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
   <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
   <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
-  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️  وسيط سوبر تون</a>
+  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ وسيط سوبر تون</a>
 
-  <p style="
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    font-size: 18px;
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    max-width: 90%;
-    box-shadow: 0 0 10px red;
-  ">
+  <p style="background-color: rgba(0, 0, 0, 0.6); color: white; font-size: 18px; padding: 15px 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; max-width: 90%; box-shadow: 0 0 10px red;">
     إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
   </p>
 
   <!-- زر واتساب العائم -->
-  <a href="https://wa.me/201274821083" target="_blank" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #000;
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-  ">
+  <a href="https://wa.me/201274821083" target="_blank" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #25D366; border-radius: 50%; box-shadow: 0 0 15px #000; z-index: 999; display: flex; justify-content: center; align-items: center; text-decoration: none;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px; height: 30px;">
   </a>
 
@@ -216,7 +193,6 @@
       });
     });
 
-    // ✨ النجوم
     for (let i = 0; i < 100; i++) {
       const star = document.createElement("div");
       star.className = "star";
@@ -228,16 +204,7 @@
       document.body.appendChild(star);
     }
 
-    // 🕒 تحديث الساعة والتاريخ
     function updateClock() {
       const now = new Date();
       const time = now.toLocaleTimeString('ar-EG');
-      const date = now.toLocaleDateString('ar-EG');
-      document.getElementById("time").textContent = time;
-      document.getElementById("date").textContent = date;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
-</body
 
