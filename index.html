@@ -114,7 +114,6 @@
       }
     }
 
-    /* ✨ النجوم */
     .star {
       position: absolute;
       width: 6px;
@@ -135,7 +134,6 @@
       50% { opacity: 1; }
     }
 
-    /* 🕒 الساعة والتاريخ بشكل أنيق */
     #clock {
       position: fixed;
       top: 20px;
@@ -184,6 +182,39 @@
     إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
   </p>
 
+  <!-- زرين الوضع الفاتح والداكن -->
+  <div style="
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+  ">
+    <button onclick="setLightMode()" style="
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      background-color: #FFD700;
+      box-shadow: 0 0 10px #000;
+    ">🌞</button>
+    <button onclick="setDarkMode()" style="
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      background-color: #333;
+      color: white;
+      box-shadow: 0 0 10px #000;
+    ">🌙</button>
+  </div>
+
   <!-- زر واتساب العائم -->
   <a href="https://wa.me/201274821083" target="_blank" style="
     position: fixed;
@@ -194,7 +225,7 @@
     background-color: #25D366;
     border-radius: 50%;
     box-shadow: 0 0 15px #000;
-    z-index: 999;
+    z-index: 998;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -221,23 +252,4 @@
       const star = document.createElement("div");
       star.className = "star";
       if (Math.random() < 0.5) {
-        star.classList.add("red");
-      }
-      star.style.top = Math.random() * 100 + "vh";
-      star.style.left = Math.random() * 100 + "vw";
-      document.body.appendChild(star);
-    }
-
-    // 🕒 تحديث الساعة والتاريخ
-    function updateClock() {
-      const now = new Date();
-      const time = now.toLocaleTimeString('ar-EG');
-      const date = now.toLocaleDateString('ar-EG');
-      document.getElementById("time").textContent = time;
-      document.getElementById("date").textContent = date;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
-</body
 
