@@ -114,7 +114,7 @@
       }
     }
 
-    /* ✨ تأثير النجوم المعدّلة */
+    /* ✨ النجوم */
     .star {
       position: absolute;
       width: 6px;
@@ -135,24 +135,34 @@
       50% { opacity: 1; }
     }
 
-    /* 🕒 الساعة والتاريخ */
+    /* 🕒 الساعة والتاريخ بشكل أنيق */
     #clock {
       position: fixed;
-      top: 10px;
-      left: 10px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: monospace;
-      box-shadow: 0 0 10px red;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 12px 20px;
+      font-size: 18px;
+      font-family: 'Courier New', monospace;
+      color: #fff;
+      box-shadow: 0 0 15px red;
       z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #clock i {
+      font-style: normal;
+      font-size: 20px;
     }
   </style>
 </head>
 <body>
-  <div id="clock"></div>
+  <div id="clock"><i>🕒</i> <span id="time"></span> <i>📅</i> <span id="date"></span></div>
 
   <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
   <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
@@ -174,7 +184,7 @@
     إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
   </p>
 
-  <!-- زر واتساب العائم بشعار واتساب -->
+  <!-- زر واتساب العائم -->
   <a href="https://wa.me/201274821083" target="_blank" style="
     position: fixed;
     bottom: 20px;
@@ -206,7 +216,7 @@
       });
     });
 
-    // ✨ إنشاء النجوم المعدّلة
+    // ✨ النجوم
     for (let i = 0; i < 100; i++) {
       const star = document.createElement("div");
       star.className = "star";
@@ -223,11 +233,11 @@
       const now = new Date();
       const time = now.toLocaleTimeString('ar-EG');
       const date = now.toLocaleDateString('ar-EG');
-      document.getElementById("clock").innerHTML = `🕒 ${time} - 📅 ${date}`;
+      document.getElementById("time").textContent = time;
+      document.getElementById("date").textContent = date;
     }
     setInterval(updateClock, 1000);
     updateClock();
   </script>
-</body>
-</html>
+</body
 
