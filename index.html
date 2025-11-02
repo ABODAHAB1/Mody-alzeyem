@@ -114,6 +114,7 @@
       }
     }
 
+    /* ✨ النجوم */
     .star {
       position: absolute;
       width: 6px;
@@ -134,6 +135,7 @@
       50% { opacity: 1; }
     }
 
+    /* 🕒 الساعة والتاريخ بشكل أنيق */
     #clock {
       position: fixed;
       top: 20px;
@@ -162,11 +164,11 @@
 <body>
   <div id="clock"><i>🕒</i> <span id="time"></span> <i>📅</i> <span id="date"></span></div>
 
-  <h1 class="typewriter" id="dynamicGreeting"></h1>
+  <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
   <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
   <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
-  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ وسيط سوبر تون</a>
+  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️  وسيط سوبر تون</a>
 
   <p style="
     background-color: rgba(0, 0, 0, 0.6);
@@ -182,6 +184,7 @@
     إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
   </p>
 
+  <!-- زر واتساب العائم -->
   <a href="https://wa.me/201274821083" target="_blank" style="
     position: fixed;
     bottom: 20px;
@@ -213,6 +216,7 @@
       });
     });
 
+    // ✨ النجوم
     for (let i = 0; i < 100; i++) {
       const star = document.createElement("div");
       star.className = "star";
@@ -224,6 +228,7 @@
       document.body.appendChild(star);
     }
 
+    // 🕒 تحديث الساعة والتاريخ
     function updateClock() {
       const now = new Date();
       const time = now.toLocaleTimeString('ar-EG');
@@ -233,14 +238,5 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-
-    // ✨ رسالة ترحيب حسب الوقت
-    function getGreeting() {
-      const hour = new Date().getHours();
-      if (hour >= 5 && hour < 12) return "✨ صباح الخير من عالم مودي الزعيم ✨";
-      if (hour >= 12 && hour < 18) return "✨ مساء الخير من عالم مودي الزعيم ✨";
-      if (hour >= 18 && hour < 24) return "✨ سهرة سعيدة من عالم مودي الزعيم ✨";
-      return "✨ تصبح على خير من عالم مودي الزعيم ✨";
-    }
-
-
+  </script>
+</body
