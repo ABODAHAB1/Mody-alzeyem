@@ -99,14 +99,20 @@
       }
     }
 
-    /* ✨ تأثير النجوم */
+    /* ✨ تأثير النجوم المعدّلة */
     .star {
       position: absolute;
-      width: 2px;
-      height: 2px;
+      width: 6px;
+      height: 6px;
       background: white;
-      animation: twinkle 2s infinite ease-in-out;
+      animation: twinkle 1.5s infinite ease-in-out;
       border-radius: 50%;
+      box-shadow: 0 0 8px white;
+    }
+
+    .star.red {
+      background: red;
+      box-shadow: 0 0 8px red;
     }
 
     @keyframes twinkle {
@@ -166,10 +172,13 @@
       });
     });
 
-    // ✨ إنشاء النجوم
+    // ✨ إنشاء النجوم المعدّلة
     for (let i = 0; i < 100; i++) {
       const star = document.createElement("div");
       star.className = "star";
+      if (Math.random() < 0.5) {
+        star.classList.add("red");
+      }
       star.style.top = Math.random() * 100 + "vh";
       star.style.left = Math.random() * 100 + "vw";
       document.body.appendChild(star);
