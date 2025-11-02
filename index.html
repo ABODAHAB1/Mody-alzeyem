@@ -40,7 +40,20 @@
       animation: slideUp 1s ease forwards;
     }
 
-    h1 {
+    p {
+      color: white;
+      font-size: 18px;
+      margin-bottom: 30px;
+      animation-delay: 0.6s;
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid gold;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 2px;
+      animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
       color: gold;
       font-size: 32px;
       text-shadow: 2px 2px 5px red;
@@ -48,11 +61,13 @@
       animation-delay: 0.3s;
     }
 
-    p {
-      color: white;
-      font-size: 18px;
-      margin-bottom: 30px;
-      animation-delay: 0.6s;
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
     }
 
     .button {
@@ -88,7 +103,7 @@
         padding: 12px 20px;
       }
 
-      h1 {
+      .typewriter {
         font-size: 24px;
       }
 
@@ -122,7 +137,7 @@
   </style>
 </head>
 <body>
-  <h1>✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
+  <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
   <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
   <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
@@ -142,7 +157,7 @@
     إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
   </p>
 
-  <!-- زر واتساب العائم الدائري -->
+  <!-- زر واتساب العائم بشعار واتساب -->
   <a href="https://wa.me/201274821083" target="_blank" style="
     position: fixed;
     bottom: 20px;
@@ -150,16 +165,15 @@
     width: 60px;
     height: 60px;
     background-color: #25D366;
-    color: white;
     border-radius: 50%;
-    font-size: 28px;
-    text-align: center;
-    line-height: 60px;
     box-shadow: 0 0 15px #000;
     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
   ">
-    📱
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px; height: 30px;">
   </a>
 
   <audio id="clickSound" src="mixkit-cartoon-toy-whistle-616 (1).wav" preload="auto"></audio>
