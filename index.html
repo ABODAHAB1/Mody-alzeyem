@@ -134,9 +134,26 @@
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
     }
+
+    /* 🕒 الساعة والتاريخ */
+    #clock {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: monospace;
+      box-shadow: 0 0 10px red;
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
+  <div id="clock"></div>
+
   <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
   <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
 
@@ -200,6 +217,16 @@
       star.style.left = Math.random() * 100 + "vw";
       document.body.appendChild(star);
     }
+
+    // 🕒 تحديث الساعة والتاريخ
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('ar-EG');
+      const date = now.toLocaleDateString('ar-EG');
+      document.getElementById("clock").innerHTML = `🕒 ${time} - 📅 ${date}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
   </script>
 </body>
 </html>
