@@ -3,248 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>التحدي — النسخة المدمجة</title>
+  <title>زر التحدي</title>
   <style>
-    :root{
-      --accent:#ff6b6b;
-      --accent-contrast:#fff;
-      --glass-bg: rgba(255,255,255,0.06);
-      --btn-size:62px;
-    }
-
-    /* عام */
-    html,body{ height:100%; margin:0; font-family: "Segoe UI", Tahoma, Arial, sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; background: linear-gradient(135deg,#0f172a 0%, #071033 100%); color:#e6eef8; }
-    .wrap{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px; box-sizing:border-box; }
-
-    /* صندوق المحتوى */
-    .container{
-      width:96%;
-      max-width:1100px;
-      padding:28px;
-      border-radius:14px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-      position:relative;
-      overflow:visible;
-    }
-    h1{ margin:0 0 12px 0; font-size:20px; color:#cfe8ff; }
-    p{ margin:0 0 12px 0; line-height:1.6; opacity:.9; }
-
-    /* زر التحدي: ظاهر، ثابت، ومحمى من التعارضات */
-    #challenge-btn{
+    #challenge-btn {
       position: fixed !important;
-      right:28px !important;
-      bottom:28px !important;
-      width:var(--btn-size) !important;
-      height:var(--btn-size) !important;
-      border-radius:50% !important;
+      right: 20px !important;
+      bottom: 20px !important;
+      width: 60px !important;
+      height: 60px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 50% !important;
+      background: red !important;
+      color: white !important;
+      font-weight: bold !important;
       border: none !important;
-      display:flex !important;
-      align-items:center !important;
-      justify-content:center !important;
-      cursor:pointer !important;
-      background: linear-gradient(135deg,var(--accent), #ff3b3b) !important;
-      color:var(--accent-contrast) !important;
-      font-weight:700 !important;
-      font-size:13px !important;
-      box-shadow: 0 10px 30px rgba(255,107,107,0.18), inset 0 -2px 8px rgba(0,0,0,0.15) !important;
-      z-index:2147483647 !important; /* أعلى قيمة ممكنة لتجنب التغطية */
-      transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .12s !important;
-      outline: none !important;
-      -webkit-tap-highlight-color: transparent !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      z-index: 99999 !important;
     }
-    #challenge-btn:active{ transform: translateY(2px) scale(.995); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
-    #challenge-btn:focus{ box-shadow: 0 0 0 6px rgba(255,107,107,0.12); }
-
-    /* نص صغير داخل الزر عند المساحة الكافية */
-    #challenge-btn .label{ display:none; margin-left:8px; font-size:13px; }
-
-    /* زر احتياطي مضمن داخل الحاوية لو حد منع fixed */
-    .anchored #challenge-btn{
-      position: absolute !important;
-      right:20px !important;
-      bottom:20px !important;
-    }
-
-    /* رسالة مؤقتة (toast) */
-    .cp-toast{
-      position: fixed;
-      left:50%;
-      top:14px;
-      transform:translateX(-50%);
-      background: linear-gradient(90deg,#0ea5e9,#6366f1);
-      color:#fff;
-      padding:10px 14px;
-      border-radius:10px;
-      z-index:2147483646;
-      box-shadow:0 8px 30px rgba(2,6,23,0.5);
-      font-weight:600;
-      font-size:14px;
-      pointer-events:none;
-      opacity:0;
-      transition: opacity .18s ease, transform .18s cubic-bezier(.2,.9,.3,1);
-    }
-    .cp-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-    /* للتأكد من الظهور على الموبايل */
-    @media (max-width:420px){
-      #challenge-btn{ right:14px !important; bottom:14px !important; --btn-size:54px; width:54px !important; height:54px !important; }
-    }
-
-    /* مساعدة مطور: إظهار إطار حول العناصر المتداخلة إن رغبت */
-    .cp-debug-outline *{ outline: 1px dashed rgba(255,255,255,0.03); }
-
-    /* حالة مخفية قسرياً (للاختبار) */
-    .cp-hidden { display:none !important; visibility:hidden !important; opacity:0 !important; pointer-events:none !important; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="container" id="main-container">
-      <h1>لوحة اختبار زر التحدي</h1>
-      <p>هذا الملف مدمج بكامل التعديلات: زر ثابت ظاهر في كل الأوقات، فحوصات تشخيصية، وإشعارات عند الضغط. إذا تستخدم نظاماً آخر لتوليد DOM أو أطر عمل (React, Vue...) الصق الزر داخل root المناسب.</p>
-      <p>ملاحظات مهمة: وضعت z-index عالي جداً وخيارات !important لتفادي تداخل CSS خارجي يمنع ظهور الزر.</p>
-
-      <!-- محتوى تجريبي إضافي -->
-      <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
-        <button id="fake-hide" style="padding:8px 12px;border-radius:8px;border:none;cursor:pointer;">جرب إخفاء الزر (test)</button>
-        <button id="fake-show" style="padding:8px 12px;border-radius:8px;border:none;cursor:pointer;">إظهار الزر لو متخفي</button>
-        <button id="debug-mode" style="padding:8px 12px;border-radius:8px;border:none;cursor:pointer;">تفعيل وضع Debug</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- الزر موجود افتراضياً في الـ DOM لتقليل مشاكل تحميل السكربت -->
-  <button id="challenge-btn" aria-label="زر التحدي" title="زر التحدي">تحدي</button>
-
-  <!-- رسالة Toast (تُضاف وتُدار عبر JS) -->
-  <div id="cp-toast" class="cp-toast" role="status" aria-live="polite"></div>
+  <button id="challenge-btn">تحدي</button>
 
   <script>
-    (function(){
-      // عناصر أساسية
-      const btn = document.getElementById('challenge-btn');
-      const toast = document.getElementById('cp-toast');
-      const mainContainer = document.getElementById('main-container');
-
-      // دوال مساعدة
-      function showToast(text, ms = 2000){
-        if(!toast) return;
-        toast.textContent = text;
-        toast.classList.add('show');
-        clearTimeout(showToast._t);
-        showToast._t = setTimeout(()=> toast.classList.remove('show'), ms);
-      }
-
-      function isHiddenByCSS(el){
-        if(!el) return true;
-        const s = getComputedStyle(el);
-        return (s.display === 'none' || s.visibility === 'hidden' || parseFloat(s.opacity) === 0);
-      }
-
-      // تأكد من وجود الزر
-      if(!btn){
-        console.error('خطأ: لم يتم العثور على #challenge-btn في الـ DOM');
-        // محاولة إنشاء الزر ديناميكياً كخطة بديلة
-        try {
-          const alt = document.createElement('button');
-          alt.id = 'challenge-btn';
-          alt.textContent = 'تحدي';
-          alt.style.position = 'fixed';
-          alt.style.right = '18px';
-          alt.style.bottom = '18px';
-          alt.style.width = '56px';
-          alt.style.height = '56px';
-          alt.style.borderRadius = '50%';
-          alt.style.background = 'linear-gradient(135deg,#ff6b6b,#ff3b3b)';
-          alt.style.color = '#fff';
-          alt.style.zIndex = '2147483647';
-          document.body.appendChild(alt);
-          console.warn('زر بديل تم إنشاؤه تلقائياً كاحتياط');
-        } catch(e){
-          console.error('تعذر إنشاء زر بديل:', e);
-        }
-      }
-
-      // إعادة انتقاء الزر بعد أي تعديل ديناميكي
-      const getBtn = () => document.getElementById('challenge-btn');
-
-      // وظيفة الضغط الأساسية
-      function onChallengeClick(){
-        showToast('أُضغطت زر التحدي — جاري تنفيذ الإجراء');
-        console.log('زر التحدي: تم الضغط — يمكنك تبديل هنا إلى وظيفة التحدي الحقيقية.');
-        // مثال: تنفيذ تحدي مؤقت - هنا استدعاء للوظيفة الحقيقية لاحقاً
-      }
-
-      // ربط الحدث بعد التأكد من وجود الزر
-      (function attach(){
-        const b = getBtn();
-        if(!b){
-          console.error('لم أجد الزر بعد المحاولة. تأكد أن DOM نهائي أو أن ID لم يتغير.');
-          return;
-        }
-        b.removeEventListener('click', onChallengeClick);
-        b.addEventListener('click', onChallengeClick);
-        // حماية من الإخفاء بالقيم الشائعة
-        try {
-          const s = getComputedStyle(b);
-          if(s.display === 'none' || s.visibility === 'hidden' || parseFloat(s.opacity) === 0){
-            console.warn('تنبيه: الزر موجود لكن مخفي عبر CSS.', { display: s.display, visibility: s.visibility, opacity: s.opacity });
-            showToast('الزر موجود لكن مخفي عبر CSS — راجع الـ CSS', 2600);
-          } else {
-            console.log('زر التحدي جاهز ومهيأ للعمل.');
-          }
-        } catch(e){ /* تجاهل أخطاء getComputedStyle في ظروف نادرة */ }
-      })();
-
-      // أزرار الاختبار داخل الواجهة لمساعدتك في التجربة
-      const fakeHide = document.getElementById('fake-hide');
-      const fakeShow = document.getElementById('fake-show');
-      const debugBtn = document.getElementById('debug-mode');
-
-      if(fakeHide){
-        fakeHide.addEventListener('click', ()=> {
-          const b = getBtn();
-          if(!b) return alert('الزر غير موجود');
-          b.classList.add('cp-hidden');
-          showToast('تم إخفاء الزر (اختبار)');
-          console.log('تم إخفاء الزر للاختبار');
-        });
-      }
-      if(fakeShow){
-        fakeShow.addEventListener('click', ()=> {
-          const b = getBtn();
-          if(!b) return alert('الزر غير موجود');
-          b.classList.remove('cp-hidden');
-          showToast('تم إظهار الزر');
-          console.log('تم إظهار الزر للاختبار');
-        });
-      }
-      if(debugBtn){
-        debugBtn.addEventListener('click', ()=> {
-          document.body.classList.toggle('cp-debug-outline');
-          showToast('تبديل وضع Debug');
-        });
-      }
-
-      // مراقب DOM بسيط: يعيد ربط الحدث لو تم استبدال الزر ديناميكياً
-      const observer = new MutationObserver((mutations) => {
-        const b = getBtn();
-        if(b){
-          // لو لم يكن مرتبطا مسبقاً
-          if(!b.dataset.cpBound){
-            b.addEventListener('click', onChallengeClick);
-            b.dataset.cpBound = '1';
-            console.log('ربطت حدث الضغط بالزر بعد تغيير DOM.');
-          }
-        }
-      });
-      observer.observe(document.body, { childList:true, subtree:true });
-
-      // فحص أخطاء عامة يساعدك في DevTools
-      console.log('فحص تكاملي: هل الزر مخفي؟', !!isHiddenByCSS(getBtn()));
-      console.log('نهاية تحميل سكربت زر التحدي.');
-    })();
+    document.getElementById("challenge-btn").onclick = function(){
+      alert("زر التحدي شغال ✅");
+    };
   </script>
 </body>
 </html>
