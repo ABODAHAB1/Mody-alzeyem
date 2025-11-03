@@ -7,208 +7,57 @@
   <link rel="icon" type="image/jpeg" href="576963288078427632_121.jpg">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ====== قاعدة عامة ====== */
-    :root {
-      --accent-red: #ff3333;
-      --glass-bg: rgba(255,255,255,0.08);
-    }
-
-    html, body {
-      height: 100%;
-    }
-
+    :root { --accent-red: #ff3333; --glass-bg: rgba(255,255,255,0.08); }
+    html, body { height: 100%; }
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Georgia', serif;
+      margin: 0; padding: 0; font-family: 'Georgia', serif;
       background-image: url("https://i.ibb.co/356hdt6t/image.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      direction: rtl;
-      animation: bgMove 20s infinite linear;
-      overflow-x: hidden;
-      box-sizing: border-box;
-      padding: 20px;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      min-height: 100vh; display: flex; justify-content: center; align-items: center;
+      flex-direction: column; direction: rtl; animation: bgMove 20s infinite linear;
+      overflow-x: hidden; box-sizing: border-box; padding: 20px;
     }
-
-    /* ====== تحسين تجربة على الشاشات الكبيرة ====== */
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      padding: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes bgMove {
-      0% { background-position: center; }
-      50% { background-position: top; }
-      100% { background-position: center; }
-    }
-
-    h1, p {
-      opacity: 0;
-      animation: slideUp 1s ease forwards;
-    }
-
-    p {
-      color: white;
-      font-size: 18px;
-      margin-bottom: 0;
-      animation-delay: 0.6s;
-    }
-
+    .container { width: 100%; max-width: 1100px; padding: 20px; box-sizing: border-box;
+      display:flex; flex-direction:column; align-items:center; gap:18px; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bgMove { 0% { background-position: center; } 50% { background-position: top; } 100% { background-position: center; } }
+    h1, p { opacity:0; animation: slideUp 1s ease forwards; }
+    p { color:white; font-size:18px; margin-bottom:0; animation-delay:0.6s; }
     .typewriter {
-      overflow: hidden;
-      border-right: 2px solid gold;
-      white-space: nowrap;
-      letter-spacing: 2px;
-      animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
-      color: gold;
-      font-size: 32px;
-      text-shadow: 2px 2px 5px red;
-      margin-bottom: 10px;
-      animation-delay: 0.3s;
-      max-width: 100%;
-      text-align: center;
+      overflow:hidden; border-right:2px solid gold; white-space:nowrap; letter-spacing:2px;
+      animation: typing 3s steps(30,end), blink 0.7s step-end infinite; color:gold; font-size:32px;
+      text-shadow:2px 2px 5px red; margin-bottom:10px; animation-delay:0.3s; max-width:100%; text-align:center;
     }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-
-    .buttons-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-
+    @keyframes typing { from { width:0 } to { width:100% } }
+    @keyframes blink { 50% { border-color:transparent } }
+    .buttons-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; align-items:center; }
     .button {
-      border: 2px solid var(--accent-red);
-      border-radius: 10px;
-      padding: 12px 26px;
-      margin: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.6);
-      text-decoration: none;
-      box-shadow: 0 0 15px var(--accent-red);
-      transition: transform 0.26s, box-shadow 0.26s, background-color 0.26s;
-      display: inline-block;
-      opacity: 0;
-      animation: slideUp 1s ease forwards;
-      white-space: nowrap;
+      border:2px solid var(--accent-red); border-radius:10px; padding:12px 26px; margin:10px;
+      font-size:20px; font-weight:bold; color:white; background-color:rgba(0,0,0,0.6);
+      text-decoration:none; box-shadow:0 0 15px var(--accent-red); transition:transform .26s, box-shadow .26s, background-color .26s;
+      display:inline-block; opacity:0; animation: slideUp 1s ease forwards; white-space:nowrap;
     }
-
-    .button:hover {
-      transform: scale(1.06);
-      box-shadow: 0 0 25px var(--accent-red);
-      background-color: rgba(255, 0, 0, 0.14);
-    }
-
-    .button:nth-of-type(n) {
-      animation-delay: calc(0.9s + (var(--i, 0) * 0.28s));
-    }
-
-    .star {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: white;
-      animation: twinkle 1.5s infinite ease-in-out;
-      border-radius: 50%;
-      box-shadow: 0 0 8px white;
-      pointer-events: none;
-    }
-
-    .star.red {
-      background: red;
-      box-shadow: 0 0 8px red;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.2); }
-    }
-
+    .button:hover { transform:scale(1.06); box-shadow:0 0 25px var(--accent-red); background-color:rgba(255,0,0,0.14); }
+    .button:nth-of-type(n) { animation-delay: calc(0.9s + (var(--i,0) * 0.28s)); }
+    .star { position:absolute; width:6px; height:6px; background:white; animation:twinkle 1.5s infinite ease-in-out;
+      border-radius:50%; box-shadow:0 0 8px white; pointer-events:none; }
+    .star.red { background:red; box-shadow:0 0 8px red; }
+    @keyframes twinkle { 0%,100% { opacity:0.2; transform:scale(0.9) } 50% { opacity:1; transform:scale(1.2) } }
     #clock {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 15px;
-      padding: 12px 18px;
-      font-size: 16px;
-      font-family: 'Courier New', monospace;
-      color: #fff;
-      box-shadow: 0 0 15px rgba(255,0,0,0.12);
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      position: fixed; top:20px; left:20px; background:var(--glass-bg); backdrop-filter: blur(8px);
+      border:1px solid rgba(255,255,255,0.12); border-radius:15px; padding:12px 18px; font-size:16px;
+      font-family:'Courier New', monospace; color:#fff; box-shadow:0 0 15px rgba(255,0,0,0.12); z-index:999;
+      display:flex; align-items:center; gap:10px;
     }
-
-    #clock i {
-      font-style: normal;
-      font-size: 18px;
-    }
-
-    /* ضبط أيقونات التواصل لتكون فوق المحتوى */
-    .floating-contact {
-      position: fixed;
-      bottom: 20px;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    /* ====== تجاوب خاص بالموبايل ====== */
-    @media (max-width: 900px) {
-      .typewriter { font-size: 28px; }
-      .button { font-size: 18px; padding: 12px 20px; }
-      #clock { font-size: 15px; padding: 10px 14px; }
-    }
-
-    @media (max-width: 600px) {
-      body { padding: 12px; }
-      .typewriter { font-size: 22px; border-right-width: 1px; }
-      .container { padding: 12px; gap: 12px; }
-      .buttons-row { flex-direction: column; gap: 12px; width: 100%; align-items: center; }
-      .button {
-        width: calc(100% - 40px);
-        max-width: 420px;
-        text-align: center;
-        padding: 12px 18px;
-      }
-      .floating-contact { width: 52px; height: 52px; }
-      .floating-contact img { width: 26px; height: 26px; }
-      #clock { top: 12px; left: 12px; font-size: 14px; padding: 8px 10px; }
+    #clock i { font-style:normal; font-size:18px; }
+    .floating-contact { position: fixed; bottom:20px; z-index:1000; display:flex; justify-content:center; align-items:center; cursor:pointer; }
+    @media (max-width:900px) { .typewriter{font-size:28px;} .button{font-size:18px; padding:12px 20px;} #clock{font-size:15px; padding:10px 14px;} }
+    @media (max-width:600px) {
+      body{padding:12px;} .typewriter{font-size:22px; border-right-width:1px;} .container{padding:12px; gap:12px;}
+      .buttons-row{flex-direction:column; gap:12px; width:100%; align-items:center;}
+      .button{width:calc(100% - 40px); max-width:420px; text-align:center; padding:12px 18px;}
+      .floating-contact{width:52px; height:52px;} .floating-contact img{width:26px; height:26px;}
+      #clock { top:12px; left:12px; font-size:14px; padding:8px 10px; }
     }
   </style>
 </head>
@@ -224,99 +73,61 @@
 
     <div class="buttons-row" role="group" aria-label="روابط">
       <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
-      <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ وسيط سوبر تون</a>
+      <a class="button" href="contest.html" style="--i:1;">🏆 تحدي اليوم</a>
+      <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:2;">🧞‍♂️ وسيط سوبر تون</a>
     </div>
   </div>
 
   <!-- زر واتساب العائم -->
   <a href="https://wa.me/201274821083" target="_blank" class="floating-contact" style="
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #000;
-    text-decoration: none;
-  ">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px; height: 30px;">
+    right:20px; width:60px; height:60px; background-color:#25D366; border-radius:50%; box-shadow:0 0 15px #000; text-decoration:none;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:30px; height:30px;">
   </a>
 
   <!-- زر تلجرام العائم -->
   <a href="https://t.me/uuruuc" target="_blank" class="floating-contact" style="
-    left: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #0088cc;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #000;
-    text-decoration: none;
-  ">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width: 30px; height: 30px;">
+    left:20px; width:60px; height:60px; background-color:#0088cc; border-radius:50%; box-shadow:0 0 15px #000; text-decoration:none;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width:30px; height:30px;">
   </a>
 
   <audio id="clickSound" src="mixkit-cartoon-toy-whistle-616 (1).wav" preload="auto"></audio>
 
   <script>
-    // تفعيل صوت عند الضغط على أزرار .button
     const buttons = document.querySelectorAll('.button');
     const sound = document.getElementById('clickSound');
-
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        if (sound) {
-          sound.currentTime = 0;
-          sound.play().catch(()=>{});
-        }
+        if (sound) { sound.currentTime = 0; sound.play().catch(()=>{}); }
       });
     });
 
-    // ✨ إنشاء النجوم العشوائية
     for (let i = 0; i < 100; i++) {
       const star = document.createElement("div");
       star.className = "star";
       if (Math.random() < 0.5) star.classList.add("red");
-      // توزيع داخل حدود أكبر بقليل لتجنب القص عند الحواف
       star.style.top = (Math.random() * 110 - 5) + "vh";
       star.style.left = (Math.random() * 110 - 5) + "vw";
-      // حجم متغير لعمق أفضل
       const size = 4 + Math.random() * 6;
-      star.style.width = size + "px";
-      star.style.height = size + "px";
-      star.style.opacity = 0.3 + Math.random() * 0.8;
-      star.style.transition = "transform 0.6s";
+      star.style.width = size + "px"; star.style.height = size + "px";
+      star.style.opacity = 0.3 + Math.random() * 0.8; star.style.transition = "transform 0.6s";
       document.body.appendChild(star);
     }
 
-    // 🕒 تحديث الساعة والتاريخ
     function updateClock() {
       const now = new Date();
       const time = now.toLocaleTimeString('ar-EG');
       const date = now.toLocaleDateString('ar-EG', { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' });
-      const timeEl = document.getElementById("time");
-      const dateEl = document.getElementById("date");
-      if (timeEl) timeEl.textContent = time;
-      if (dateEl) dateEl.textContent = date;
+      const timeEl = document.getElementById("time"); const dateEl = document.getElementById("date");
+      if (timeEl) timeEl.textContent = time; if (dateEl) dateEl.textContent = date;
     }
+    setInterval(updateClock, 1000); updateClock();
 
-    // تحديث كل ثانية
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // تشغيل صوت عند الضغط على أيقونات التواصل أيضاً
     const floatContacts = document.querySelectorAll('.floating-contact');
     floatContacts.forEach(el => {
-      el.addEventListener('click', () => {
-        if (sound) {
-          sound.currentTime = 0;
-          sound.play().catch(()=>{});
-        }
-      });
+      el.addEventListener('click', () => { if (sound) { sound.currentTime = 0; sound.play().catch(()=>{}); } });
     });
 
-    // السماح بالتفاعل بعد التحميل
-    window.addEventListener('load', () => {
-      document.body.style.pointerEvents = 'auto';
-    });
+    window.addEventListener('load', () => { document.body.style.pointerEvents = 'auto'; });
   </script>
 </body>
 </html>
