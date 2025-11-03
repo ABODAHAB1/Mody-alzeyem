@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تحدي الصعيدي اليومي - مودي الزعيم</title>
+<link rel="icon" type="image/jpeg" href="576963288078427632_121.jpg">
+<style>
+  :root{--accent:#ff3b3b;--glass:rgba(0,0,0,0.45)}
+  body{font-family:Segoe UI, Tahoma, Arial; margin:0; padding:20px; background:linear-gradient(180deg,#0b0b0b 0%, #111 60%); color:#fff; direction:rtl}
+  .wrap{max-width:940px;margin:0 auto;display:flex;flex-direction:column;gap:18px;align-items:center}
+  .title{font-size:22px;color:gold;text-align:center}
+  .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:18px;width:100%;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+  .btn.secondary{background:#333}
+  .small{font-size:13px;color:#ddd}
+  .center{text-align:center}
+  input[type="text"], input[type="number"], select{width:100%;padding:10px;border-radius:8px;border:1px solid #222;background:#050505;color:#fff;box-sizing:border-box}
+  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999}
+  .modal{background:#0f0f10;border-radius:12px;padding:18px;max-width:700px;width:92%;box-shadow:0 8px 30px rgba(0,0,0,0.7)}
+  .bank-list{max-height:260px;overflow:auto;margin-top:6px}
+  @media(max-width:600px){.title{font-size:18px;padding:0 8px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <a href="index.html" style="color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;background:rgba(0,0,0,0.3)">◀ رجوع للموقع</a>
+      <div class="title">تحدي الصعيدي اليومي — اكسب كود فوري لو حِلّت</div>
+      <div style="width:80px"></div>
+    </div>
+
+    <div class="card center" id="todayCard">
+      <div id="statusLine" class="small">تحميل التحدي اليوم...</div>
+      <h3 id="challengeText" style="margin:12px 0;font-size:18px">...</h3>
+
+      <div id="inputArea" style="margin-top:8px"></div>
+
+      <div style="margin-top:12px" class="row" role="group" aria-label="إجراءات التحدي">
+        <button class="btn" id="submitBtn">أرسل إجابتي</button>
+        <button class="btn secondary" id="skipBtn">أبدّل التحدي (مرّة واحدة)</button>
+        <button class="btn secondary" id="showHintBtn">أظهر تلميح</button>
+      </div>
+
+      <div id="result" style="margin-top:12px" class="small"></div>
+
+      <div id="awardBox" class="hidden" style="margin-top:12px;padding:12px;border-radius:8px;background:linear-gradient(90deg,#111,#1a1a1a);">
+        <div class="small">مبروك! كود الجائزة:</div>
+        <div id="awardCode" style="font-weight:900;color:gold;margin-top:6px;font-size:18px"></div>
+        <div class="small" style="margin-top:8px">انسخ الكود واحتفظ بيه أو اضغط "طلب عبر التليجرام" لإرساله مباشرة.</div>
+        <div style="margin-top:8px" class="row">
+          <button class="btn" id="copyAward">نسخ الكود</button>
+          <a id="tgLink" class="btn secondary" href="#" target="_blank">طلب عبر التليجرام</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%;display:flex;gap:12px;justify-content:center">
+      <button class="btn" id="openAdmin">فتح لوحة المدير</button>
+      <button class="btn secondary" id="forceNew">توليد تحدي جديد الآن</button>
+    </div>
+
+    <div class="card small" id="howItWorks">
+      كيف يشتغل: النظام يختار تحدي واحد لكل يوم. تقدر تبدّل التحدي مرّة واحدة في اليوم. لو حل الزائر التحدي يظهر له كود فوري عشوائي.
+    </div>
+  </div>
+
+  <!-- Admin modal -->
+  <div class="modal-back" id="adminModal">
+    <div class="modal">
+      <h3>لوحة المدير — إدارة بنك التحديات</h3>
+      <div class="row" style="margin-top:8px">
+        <button class="btn" id="genAuto">توليد 10 تحديات تلقائيًا</button>
+        <button class="btn secondary" id="clearBank">مسح بنك التحديات</button>
+        <button class="btn secondary" id="exportBank">تصدير بنك (JSON)</button>
+        <button class="btn secondary" id="importBankBtn">استيراد بنك</button>
+      </div>
+
+      <div style="margin-top:12px">
+        <label class="small">أضف تحدي يدويًا (نوع، نص، إجابة، تلميح):</label>
+        <select id="manualType">
+          <option value="math">مسألة حسابية</option>
+          <option value="tf">صح أو خطأ</option>
+          <option value="riddle">لغز نصي</option>
+          <option value="guess">خمن رقم</option>
+          <option value="choose">اختر الكلمة الصحيحة</option>
+        </select>
+        <input id="manualText" placeholder="نص السؤال أو الوصف" style="margin-top:8px"/>
+        <input id="manualAnswer" placeholder="الإجابة الصحيحة (نص/رقم/صح|خطأ|index للكلمة)" style="margin-top:8px"/>
+        <input id="manualHint" placeholder="تلميح (اختياري)" style="margin-top:8px"/>
+        <div style="margin-top:8px" class="row">
+          <button class="btn" id="addManual">أضف للتحديات</button>
+          <button class="btn secondary" id="closeAdmin">إغلاق</button>
+        </div>
+      </div>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid #222"/>
+
+      <div>
+        <div class="small">معاينة بنك التحديات (أحدث أولاً):</div>
+        <div id="bankList" class="bank-list"></div>
+      </div>
+
+      <input id="importInput" type="file" accept="application/json" class="hidden"/>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'mody_challenges_v1';
+    const STATE_KEY = 'mody_daily_state_v1';
+    function loadBank(){ try{ const raw=localStorage.getItem(STORAGE_KEY); return raw? JSON.parse(raw): []; }catch(e){return [];} }
+    function saveBank(bank){ localStorage.setItem(STORAGE_KEY, JSON.stringify(bank)); }
+    function uid(){ return 'id'+Math.random().toString(36).slice(2,9); }
+
+    function generateRandomChallenge(){
+      const t = Math.random();
+      if(t < 0.25){
+        const a = Math.floor(Math.random()*12)+1; const b = Math.floor(Math.random()*12)+1;
+        const ops = ['+','-','x']; const op = ops[Math.floor(Math.random()*ops.length)];
+        let text = `احسب: ${a} ${op} ${b}`; let answer;
+        if(op==='+') answer = String(a+b);
+        if(op==='-') answer = String(a-b);
+        if(op==='x') answer = String(a*b);
+        return { id: uid(), type:'math', text, answer, hint:'ابدأ بالحساب بالتدريج' };
+      } else if(t < 0.45){
+        const facts = [
+          {q:'النيل هو أطول نهر في العالم', a:'خطأ'},
+          {q:'القاهرة هي عاصمة مصر', a:'صح'},
+          {q:'الهرم الأكبر يقع في الأقصر', a:'خطأ'},
+          {q:'الجمعة عطلة رسمية في معظم البلاد العربية', a:'صح'}
+        ];
+        const pick = facts[Math.floor(Math.random()*facts.length)];
+        return { id: uid(), type:'tf', text: pick.q, answer: pick.a, hint:'اختار صح أو خطأ' };
+      } else if(t < 0.7){
+        const riddles = [
+          {q:'شيء تراه في الليل والنهار لكنه لا يتحرك، ما هو؟', a:'القمر'},
+          {q:'له أسنان لكن لا يعض، ما هو؟', a:'المشط'},
+          {q:'له أوراق لكنه ليس نباتا، ما هو؟', a:'الكتاب'}
+        ];
+        const p = riddles[Math.floor(Math.random()*riddles.length)];
+        return { id: uid(), type:'riddle', text: p.q, answer: p.a, hint:'فكر بشكل مجازي' };
+      } else if(t < 0.9){
+        const secret = Math.floor(Math.random()*50)+1;
+        return { id: uid(), type:'guess', text: `خمن رقم بين 1 و50`, answer: String(secret), hint:'حاول استخدام الحظ أو القياس' };
+      } else {
+        const sets = [
+          {q:'أي كلمة معناها مرحبًا باللهجة؟', choices:['ها يا باشا','أهلا','يا عم'], idx:1},
+          {q:'أي كلمة تعني "حلو" باللهجة؟', choices:['قمر','حلو','سخن'], idx:1}
+        ];
+        const p = sets[Math.floor(Math.random()*sets.length)];
+        return { id: uid(), type:'choose', text: p.q, choices: p.choices, answer: String(p.idx), hint:'اختار رقم الجواب الصحيح' };
+      }
+    }
+
+    function loadState(){ try{ return JSON.parse(localStorage.getItem(STATE_KEY)||'null')||null; }catch(e){return null;} }
+    function saveState(s){ localStorage.setItem(STATE_KEY, JSON.stringify(s)); }
+    function todayISO(){ const d=new Date(); return d.toISOString().slice(0,10); }
+
+    function pickChallengeOfTheDay(bank){
+      const st = loadState(); const today = todayISO();
+      if(st && st.date === today){ return { state: st, challenge: bank.find(x=>x.id===st.challengeId) || null }; }
+      if(!bank || bank.length===0) return { state:null, challenge:null };
+      const idx = Math.floor(Math.random()*bank.length);
+      const c = bank[idx];
+      const newState = { date: today, challengeId:c.id, skipped:false, solved:false, awardCode:null };
+      saveState(newState);
+      return { state:newState, challenge:c };
+    }
+
+    const challengeText = document.getElementById('challengeText');
+    const inputArea = document.getElementById('inputArea');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultEl = document.getElementById('result');
+    const awardBox = document.getElementById('awardBox');
+    const awardCodeEl = document.getElementById('awardCode');
+    const copyAwardBtn = document.getElementById('copyAward');
+    const tgLink = document.getElementById('tgLink');
+    const skipBtn = document.getElementById('skipBtn');
+    const showHintBtn = document.getElementById('showHintBtn');
+    const statusLine = document.getElementById('statusLine');
+
+    let CURRENT = { state:null, challenge:null };
+    function renderChallenge(){
+      const bank = loadBank();
+      const choice = pickChallengeOfTheDay(bank);
+      CURRENT = choice;
+      awardBox.classList.add('hidden'); resultEl.textContent = '';
+      if(!choice.challenge){
+        challengeText.textContent = 'لا توجد تحديات بعد. افتح لوحة المدير لتوليد تحديات أو إضافتها يدوياً.';
+        inputArea.innerHTML = ''; statusLine.textContent = 'لا يوجد تحدي لهذا اليوم'; return;
+      }
+      const ch = choice.challenge;
+      statusLine.textContent = `تحدي اليوم — ${choice.state && choice.state.solved ? 'تم حله' : 'لم يُحل بعد'}`;
+      challengeText.textContent = ch.text; inputArea.innerHTML = '';
+      if(ch.type === 'math' || ch.type === 'riddle' || ch.type === 'tf'){
+        const input = document.createElement('input'); input.type='text'; input.id='answerInput'; input.placeholder='اكتب إجابتك هنا'; input.autocomplete='off';
+        inputArea.appendChild(input);
+      } else if(ch.type === 'guess'){
+        const input = document.createElement('input'); input.type='number'; input.id='answerInput'; input.placeholder='رقم من 1 إلى 50'; input.autocomplete='off';
+        inputArea.appendChild(input);
+      } else if(ch.type === 'choose'){
+        const sel = document.createElement('select'); sel.id='answerInput';
+        ch.choices.forEach((c,i)=>{ const opt=document.createElement('option'); opt.value=String(i); opt.textContent=(i+1)+'. '+c; sel.appendChild(opt) });
+        inputArea.appendChild(sel);
+      }
+
+      if(choice.state && choice.state.solved){
+        awardBox.classList.remove('hidden');
+        awardCodeEl.textContent = choice.state.awardCode || '—';
+      }
+    }
+
+    function normalize(a){ return String(a||'').trim().toLowerCase(); }
+    function checkAnswer(ch, attempt){
+      if(!ch) return false; const type = ch.type;
+      if(type === 'tf'){ return normalize(attempt) === normalize(ch.answer); }
+      if(type === 'math' || type === 'riddle' || type==='guess'){ return normalize(attempt) === normalize(ch.answer); }
+      if(type === 'choose'){ return normalize(attempt) === normalize(ch.answer); }
+      return false;
+    }
+    function generateAwardCode(){ return 'MODY-' + Math.random().toString(36).slice(2,7).toUpperCase(); }
+
+    submitBtn.addEventListener('click', ()=>{
+      const st = loadState();
+      if(!CURRENT.challenge){ resultEl.textContent='لا يوجد تحدي.'; return; }
+      const inp = document.getElementById('answerInput'); const val = inp? inp.value : '';
+      if(!val){ resultEl.textContent = 'اكتب إجابة أولاً'; return; }
+      const ok = checkAnswer(CURRENT.challenge, val);
+      if(ok){
+        const s = loadState() || {};
+        s.solved = true;
+        if(!s.awardCode) s.awardCode = generateAwardCode();
+        saveState(s);
+        awardCodeEl.textContent = s.awardCode;
+        awardBox.classList.remove('hidden');
+        resultEl.textContent = 'إجابة صحيحة! خدت الكود الفوري.';
+        statusLine.textContent = 'تحدي اليوم — تم حله';
+        const message = encodeURIComponent(`أهلًا يا مودي، تم حل تحدي اليوم وحصلت على الكود: ${s.awardCode}`);
+        tgLink.href = `https://t.me/share/url?url=&text=${message}`;
+      } else {
+        resultEl.textContent = 'للأسف الإجابة خطأ. جرّب مرة ثانية أو اضغط تلميح.';
+      }
+    });
+
+    skipBtn.addEventListener('click', ()=>{
+      const st = loadState() || {};
+      if(st.skipped){ resultEl.textContent='استخدمت تبديل التحدي بالفعل لهذا اليوم.'; return; }
+      const bank = loadBank();
+      if(bank.length<=1){ resultEl.textContent='لا توجد تحديات كافية للتبديل.'; return; }
+      let attempts=0, newCh=null;
+      while(attempts<50){
+        const idx = Math.floor(Math.random()*bank.length);
+        if(bank[idx].id !== st.challengeId){ newCh = bank[idx]; break; }
+        attempts++;
+      }
+      if(!newCh){ resultEl.textContent='لم أستطع توليد تحدي جديد.'; return; }
+      st.challengeId = newCh.id; st.skipped = true; st.solved = false; st.awardCode = null; saveState(st);
+      renderChallenge(); resultEl.textContent='تم تبديل التحدي. حظًا موفقًا!';
+    });
+
+    showHintBtn.addEventListener('click', ()=>{ if(!CURRENT.challenge){ resultEl.textContent='لا يوجد تحدي.'; return; } resultEl.textContent = CURRENT.challenge.hint || 'لا يوجد تلميح لهذا التحدي.'; });
+
+    copyAwardBtn.addEventListener('click', ()=> {
+      const code = awardCodeEl.textContent || '';
+      if(!code) return;
+      navigator.clipboard?.writeText(code).then(()=>{ alert('تم نسخ الكود'); }).catch(()=>{ alert('انسخ الكود يدويًا: '+code); });
+    });
+
+    // admin modal and bank management
+    const adminModal = document.getElementById('adminModal');
+    document.getElementById('openAdmin').addEventListener('click', ()=>{ adminModal.style.display='flex'; renderBankList(); });
+    document.getElementById('closeAdmin').addEventListener('click', ()=>{ adminModal.style.display='none'; });
+
+    document.getElementById('genAuto').addEventListener('click', ()=>{
+      const bank = loadBank();
+      for(let i=0;i<10;i++) bank.unshift(generateRandomChallenge());
+      saveBank(bank); renderBankList(); alert('أُضيفت 10 تحديات تلقائيًا.');
+    });
+
+    document.getElementById('clearBank').addEventListener('click', ()=>{ if(confirm('مسح كل التحديات؟')){ saveBank([]); renderBankList(); alert('تم المسح.'); } });
+
+    document.getElementById('addManual').addEventListener('click', ()=>{
+      const t = document.getElementById('manualType').value;
+      const text = document.getElementById('manualText').value.trim();
+      const ans = document.getElementById('manualAnswer').value.trim();
+      const hint = document.getElementById('manualHint').value.trim();
+      if(!text || !ans){ alert('املا الحقول النصية والإجابة'); return; }
+      const bank = loadBank(); const ch = { id: uid(), type: t, text, answer: ans, hint };
+      bank.unshift(ch); saveBank(bank);
+      document.getElementById('manualText').value=''; document.getElementById('manualAnswer').value=''; document.getElementById('manualHint').value='';
+      renderBankList();
+    });
+
+    function renderBankList(){
+      const bank = loadBank(); const box = document.getElementById('bankList'); box.innerHTML = '';
+      if(bank.length===0){ box.innerHTML = '<div class="small">لا توجد تحديات</div>'; return; }
+      bank.forEach((c,i)=>{
+        const el = document.createElement('div'); el.style.padding='8px'; el.style.borderBottom='1px solid #222';
+        el.innerHTML = `<strong style="color:gold">${c.type}</strong> — ${c.text} <div class="small">إجابة: ${c.answer} ${c.hint?(' | تلميح: '+c.hint):''}</div>`;
+        const del = document.createElement('button'); del.textContent='حذف'; del.className='btn secondary'; del.style.marginTop='6px';
+        del.addEventListener('click', ()=>{ if(confirm('حذف هذا التحدي؟')){ const b=loadBank(); saveBank(b.filter(x=>x.id!==c.id)); renderBankList(); }});
+        el.appendChild(del); box.appendChild(el);
+      });
+    }
+
+    document.getElementById('exportBank').addEventListener('click', ()=>{
+      const bank = loadBank(); const blob = new Blob([JSON.stringify(bank, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'challenges.json'; a.click(); URL.revokeObjectURL(url);
+    });
+    document.getElementById('importBankBtn').addEventListener('click', ()=>{ document.getElementById('importInput').click(); });
+    document.getElementById('importInput').addEventListener('change', (e)=>{
+      const f = e.target.files[0]; if(!f) return; const r = new FileReader();
+      r.onload = ()=>{ try{ const arr = JSON.parse(r.result); if(Array.isArray(arr)){ saveBank(arr); renderBankList(); alert('تم استيراد البنك'); }else alert('الملف ليس مصفوفة JSON'); }catch(err){ alert('خطأ في قراءة الملف'); } };
+      r.readAsText(f);
+    });
+
+    document.getElementById('forceNew').addEventListener('click', ()=>{
+      const bank = loadBank(); if(bank.length===0){ alert('لا توجد تحديات. افتح لوحة المدير لتوليدها.'); return; }
+      localStorage.removeItem(STATE_KEY); renderChallenge();
+    });
+
+    (function init(){
+      let bank = loadBank();
+      if(bank.length===0){ for(let i=0;i<6;i++) bank.push(generateRandomChallenge()); saveBank(bank); }
+      renderChallenge();
+    })();
+  </script>
+</body>
+</html>
+
