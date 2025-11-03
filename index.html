@@ -3,9 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>مودي الزعيم</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/jpeg" href="576963288078427632_121.jpg">
   <link rel="stylesheet" href="style.css">
   <style>
+    /* ====== قاعدة عامة ====== */
+    :root {
+      --accent-red: #ff3333;
+      --glass-bg: rgba(255,255,255,0.08);
+    }
+
+    html, body {
+      height: 100%;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -21,7 +32,21 @@
       flex-direction: column;
       direction: rtl;
       animation: bgMove 20s infinite linear;
-      overflow: hidden;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+
+    /* ====== تحسين تجربة على الشاشات الكبيرة ====== */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
     }
 
     @keyframes slideUp {
@@ -43,7 +68,7 @@
     p {
       color: white;
       font-size: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 0;
       animation-delay: 0.6s;
     }
 
@@ -51,7 +76,6 @@
       overflow: hidden;
       border-right: 2px solid gold;
       white-space: nowrap;
-      margin: 0 auto;
       letter-spacing: 2px;
       animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
       color: gold;
@@ -59,7 +83,8 @@
       text-shadow: 2px 2px 5px red;
       margin-bottom: 10px;
       animation-delay: 0.3s;
-      max-width: 90%;
+      max-width: 100%;
+      text-align: center;
     }
 
     @keyframes typing {
@@ -71,48 +96,40 @@
       50% { border-color: transparent }
     }
 
+    .buttons-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
     .button {
-      border: 2px solid red;
+      border: 2px solid var(--accent-red);
       border-radius: 10px;
-      padding: 15px 30px;
+      padding: 12px 26px;
       margin: 10px;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       color: white;
       background-color: rgba(0, 0, 0, 0.6);
       text-decoration: none;
-      box-shadow: 0 0 15px red;
-      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+      box-shadow: 0 0 15px var(--accent-red);
+      transition: transform 0.26s, box-shadow 0.26s, background-color 0.26s;
       display: inline-block;
       opacity: 0;
       animation: slideUp 1s ease forwards;
+      white-space: nowrap;
     }
 
     .button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px red;
-      background-color: rgba(255, 0, 0, 0.2);
+      transform: scale(1.06);
+      box-shadow: 0 0 25px var(--accent-red);
+      background-color: rgba(255, 0, 0, 0.14);
     }
 
     .button:nth-of-type(n) {
-      animation-delay: calc(0.9s + (var(--i, 0) * 0.4s));
-    }
-
-    @media (max-width: 600px) {
-      .button {
-        font-size: 18px;
-        padding: 12px 20px;
-      }
-
-      .typewriter {
-        font-size: 24px;
-      }
-
-      p {
-        font-size: 16px;
-        padding: 0 10px;
-        text-align: center;
-      }
+      animation-delay: calc(0.9s + (var(--i, 0) * 0.28s));
     }
 
     .star {
@@ -140,15 +157,15 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--glass-bg);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 15px;
-      padding: 12px 20px;
-      font-size: 18px;
+      padding: 12px 18px;
+      font-size: 16px;
       font-family: 'Courier New', monospace;
       color: #fff;
-      box-shadow: 0 0 15px rgba(255,0,0,0.15);
+      box-shadow: 0 0 15px rgba(255,0,0,0.12);
       z-index: 999;
       display: flex;
       align-items: center;
@@ -157,7 +174,7 @@
 
     #clock i {
       font-style: normal;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     /* ضبط أيقونات التواصل لتكون فوق المحتوى */
@@ -165,31 +182,65 @@
       position: fixed;
       bottom: 20px;
       z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* ====== تجاوب خاص بالموبايل ====== */
+    @media (max-width: 900px) {
+      .typewriter { font-size: 28px; }
+      .button { font-size: 18px; padding: 12px 20px; }
+      #clock { font-size: 15px; padding: 10px 14px; }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+      .typewriter { font-size: 22px; border-right-width: 1px; }
+      .container { padding: 12px; gap: 12px; }
+      .buttons-row { flex-direction: column; gap: 12px; width: 100%; align-items: center; }
+      .button {
+        width: calc(100% - 40px);
+        max-width: 420px;
+        text-align: center;
+        padding: 12px 18px;
+      }
+      .floating-contact { width: 52px; height: 52px; }
+      .floating-contact img { width: 26px; height: 26px; }
+      #clock { top: 12px; left: 12px; font-size: 14px; padding: 8px 10px; }
     }
   </style>
 </head>
 <body>
   <div id="clock"><i>🕒</i> <span id="time"></span> <i>📅</i> <span id="date"></span></div>
 
-  <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
-  <p>هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!</p>
+  <div class="container">
+    <h1 class="typewriter">✨ مرحبًا بك في عالم مودي الزعيم ✨</h1>
 
-  <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
-  <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️  وسيط سوبر تون</a>
+    <p style="color:white; font-size:18px; text-align:center; max-width:900px; margin:0;">
+      هنا هتلاقي كل خدمات <strong>مودي الزعيم</strong> من توثيق، نجوم، شدات، عملات رقمية، وكل اللي نفسك فيه!
+    </p>
 
-  <p style="
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    font-size: 18px;
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    max-width: 90%;
-    box-shadow: 0 0 10px red;
-  ">
-    إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
-  </p>
+    <div class="buttons-row" role="group" aria-label="روابط">
+      <a class="button" href="market.html" style="--i:0;">🚀 دخول إلى الماركت</a>
+      <a class="button" href="https://t.me/Tooon_Ch" target="_blank" style="--i:1;">🧞‍♂️ وسيط سوبر تون</a>
+    </div>
+
+    <p style="
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-size: 18px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 0;
+      text-align: center;
+      max-width: 100%;
+      box-shadow: 0 0 10px rgba(255,0,0,0.12);
+    ">
+      إذا كنت بحاجة إلى عرض من العروض الموجودة على الماركت، ولم تتمكن من التواصل معي عبر التليجرام، يمكنك التواصل معي عبر الواتساب.
+    </p>
+  </div>
 
   <!-- زر واتساب العائم -->
   <a href="https://wa.me/201274821083" target="_blank" class="floating-contact" style="
@@ -199,9 +250,6 @@
     background-color: #25D366;
     border-radius: 50%;
     box-shadow: 0 0 15px #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-decoration: none;
   ">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px; height: 30px;">
@@ -215,9 +263,6 @@
     background-color: #0088cc;
     border-radius: 50%;
     box-shadow: 0 0 15px #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-decoration: none;
   ">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width: 30px; height: 30px;">
@@ -251,7 +296,7 @@
       const size = 4 + Math.random() * 6;
       star.style.width = size + "px";
       star.style.height = size + "px";
-      star.style.opacity = 0.4 + Math.random() * 0.8;
+      star.style.opacity = 0.3 + Math.random() * 0.8;
       star.style.transition = "transform 0.6s";
       document.body.appendChild(star);
     }
@@ -259,7 +304,6 @@
     // 🕒 تحديث الساعة والتاريخ
     function updateClock() {
       const now = new Date();
-      // عرض الوقت بصيغة محلية عربية مصرية
       const time = now.toLocaleTimeString('ar-EG');
       const date = now.toLocaleDateString('ar-EG', { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' });
       const timeEl = document.getElementById("time");
@@ -272,7 +316,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // تحسين: تشغيل صوت عند الضغط على أيقونات التواصل أيضاً
+    // تشغيل صوت عند الضغط على أيقونات التواصل أيضاً
     const floatContacts = document.querySelectorAll('.floating-contact');
     floatContacts.forEach(el => {
       el.addEventListener('click', () => {
@@ -283,7 +327,7 @@
       });
     });
 
-    // منع تداخل عناصر الواجهة مع النقر على الأزرار أثناء التحميل الثقيل
+    // السماح بالتفاعل بعد التحميل
     window.addEventListener('load', () => {
       document.body.style.pointerEvents = 'auto';
     });
