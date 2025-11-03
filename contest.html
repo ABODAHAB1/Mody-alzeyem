@@ -1,38 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>زر التحدي</title>
+  <meta charset="UTF-8">
+  <title>مسابقة اليوم - مودي الزعيم</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    #challenge-btn {
-      position: fixed !important;
-      right: 20px !important;
-      bottom: 20px !important;
-      width: 60px !important;
-      height: 60px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border-radius: 50% !important;
-      background: red !important;
-      color: white !important;
-      font-weight: bold !important;
-      border: none !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      cursor: pointer !important;
-      z-index: 99999 !important;
-    }
+    body { margin:0; padding:30px; font-family:'Georgia', serif; background:linear-gradient(135deg,#0f1724,#1f2937);
+      color:#fff; direction:rtl; min-height:100vh; box-sizing:border-box; }
+    .card { max-width:900px; margin:40px auto; background:rgba(255,255,255,0.03); border-radius:12px;
+      padding:24px; box-shadow:0 8px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.05); }
+    h1{ margin:0 0 8px 0; color:gold; } p{ margin:8px 0; line-height:1.6; }
+    .meta{ color:#cbd5e1; font-size:14px; margin-bottom:12px; }
+    .btn{ display:inline-block; padding:10px 18px; background:#ff4500; color:white; border-radius:8px;
+      text-decoration:none; font-weight:bold; margin-top:12px; }
+    .hint{ margin-top:14px; color:#f3f4f6; background:rgba(255,255,255,0.02); padding:10px; border-radius:8px; }
   </style>
 </head>
 <body>
-  <button id="challenge-btn">تحدي</button>
+  <div class="card">
+    <h1 id="title">مسابقة اليوم</h1>
+    <div class="meta">التاريخ: <span id="date"></span> — مسابقة رقم: <span id="index"></span></div>
+    <p id="desc">جارٍ تحميل المسابقة...</p>
+    <div class="hint" id="hint"></div>
+    <a class="btn" id="back" href="index.html">◀ ارجاع للرئيسية</a>
+    <a class="btn" id="share" href="#" style="background:#0088cc; margin-left:10px;">مشاركة المسابقة</a>
+  </div>
 
   <script>
-    document.getElementById("challenge-btn").onclick = function(){
-      alert("زر التحدي شغال ✅");
-    };
+    const contests = [
+      { title: "سؤال بسيط", desc: "جاوب سؤال اليوم: ما اسم لعبتك المفضلة ولماذا؟", hint: "اختصر إجابتك في جملة." },
+      { title: "تحدي صورة", desc: "شارك صورة لشيء أعجبك اليوم.", hint: "اختار زاوية واضاءة كويسة." },
+      { title: "تحدي سرعة", desc: "رتب ملف واحد أو صورة في 10 دقائق.", hint: "ابدأ بالأقدم ثم الأحدث." },
+      { title: "تحدي تصميم", desc: "اصنع لوجو بسيط باستخدام لون واحد.", hint: "ابقى واضح وبسيط." },
+      { title: "تحدي دعوة", desc: "ادعو صديقين للانضمام للقناة اليوم.", hint: "اخبرهم سبب الانضمام." },
+      { title: "تحدي تعلم", desc: "شاهد فيديو 5 دقائق وتطبيق واحد سريع.", hint: "الاختصار أفضل." },
+      { title: "تحدي الامتنان", desc: "اكتب 3 أشياء ممتن لها اليوم.", hint: "ركز على الصغير والكبير." }
+    ];
+
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 1);
+    const dayIndex = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    const idx = dayIndex % contests.length;
+    const today = contests[idx];
+
+    document.getElementById('title').textContent = today.title;
+    document.getElementById('desc').textContent = today.desc;
+    document.getElementById('hint').textContent = "تلميح: " + today.hint;
+    document.getElementById('index').textContent = (idx + 1) + " / " + contests.length;
+    document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', { weekday:'long', year:'numeric', month:'numeric', day:'numeric' });
+
+    document.getElementById('share').addEventListener('click', function(e){
+      e.preventDefault();
+      const text = `مسابقة اليوم (${today.title}): ${today.desc} — ${now.toLocaleDateString('ar-EG')}`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(()=> { alert('تم نسخ نص المسابقة للمشاركة!'); })
+          .catch(()=> { prompt('انسخ نص المسابقة يدوياً:', text); });
+      } else { prompt('انسخ نص المسابقة يدوياً:', text); }
+    });
   </script>
 </body>
 </html>
